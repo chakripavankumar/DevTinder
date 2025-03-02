@@ -1,10 +1,16 @@
-import { Navbar } from "./components/Navbar";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./pages/Main";
+import { LandingPage } from "./pages/LandingPage";
 function App() {
   return (
-    <div >
-       <Navbar/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/feed" element={<Main />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
