@@ -1,25 +1,30 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../config";
+
 export function SigninUp() {
+
   const navigate = useNavigate();
-  const [fristname,SetFristName] = useState("");
-  const [lastname, SetLastName]  = useState("");
-  const [email, setEmail]        = useState("");
-  const [password, setPassword]  = useState("");
+  const [firstName, SetFristName] = useState("");
+  const [lastName, SetlastName] = useState("");
+  const [emailId, setemailId] = useState("");
+  const [password, setPassword] = useState("");
 
   const HandleSignup = async () => {
+    
      try {
-           const res = await axios.post("http://localhost:3000/signup",{
-            fristname, lastname,email,password
+            await axios.post(BASE_URL+ "/signup",{
+            firstName, lastName,emailId,password
         });
+           navigate("/feed")
      } catch (error) {
        console.log(error);
        
-     }
+     }   
   };
   return (
-    <div className=" h-screen w-screen bg-base-300 flex justify-center items-center">
+    <div className="h-screen w-screen bg-base-300 flex justify-center items-center">
       <div className="card card-border bg-base-100 w-80">
         <div className="card-body">
           <h2 className="card-title  flex justify-center">Create Account</h2>
@@ -28,15 +33,11 @@ export function SigninUp() {
             <input type="text" className="input" placeholder="Type here" onChange={(e)=> SetFristName(e.target.value)} />
           </fieldset>
           <fieldset className="fieldset">
-            <input type="text" className="input" placeholder="lastname" onChange={(e)=> SetLastName(e.target.value)} />
+            <input type="text" className="input" placeholder="lastname" onChange={(e)=> SetlastName(e.target.value)} />
           </fieldset>
           <div>
             <label className="input validator flex-row">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24" >
                 <g
                   strokeLinejoin="round"
                   strokeLinecap="round"
@@ -50,9 +51,9 @@ export function SigninUp() {
               </svg>
               <input
                 type="email "
-                placeholder="mail@site.com"
+                placeholder="mail@gmail.com"
                 required
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setemailId(e.target.value)}
               />
             </label>
           </div>

@@ -1,24 +1,36 @@
 import axios from "axios";
 import { useState } from "react";
+import { BASE_URL } from "../../config";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export function Signin() {
-  const navigate               = useNavigate();
-  const [email, setEmail]      = useState("");
-  const [password,setPassword] = useState(""); 
+
+  const navigate                  = useNavigate();
+  const [emailId, setemailId]     = useState("");
+  const [password, setPassword]   = useState(""); 
+  const dispatch                  = useDispatch();
 
   const HandleSignin =  async ( ) => {
+
     try {
-      const res =  await axios.post("http://localhost:3000/login" , {
-        email,password
-      },{withCredentials:true});
-    } catch (error) {
+
+      const res =  await axios.post(BASE_URL + "/login" , {
+        emailId,password
+      },
+      {withCredentials:true}
+    );
+      dispatch(addUser(res.data));
+      return  navigate("/feed")
+    }
+     catch (error) {
+
       console.log(error);
-      
     }
   }
   return (
-    <div className=" h-screen w-screen bg-base-300 flex justify-center items-center">
+    <div className="h-screen w-screen bg-base-300 flex justify-center items-center">
       <div className="card card-border bg-base-100 w-80">
         <div className="card-body">
           <h2 className="card-title  flex justify-center">Login</h2>
@@ -40,7 +52,7 @@ export function Signin() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
               </svg>
-              <input type="email" placeholder="mail@site.com" required  onChange={(e) => setEmail(e.target.value)}/>
+              <input type="email" placeholder="mail@site.com" required  onChange={(e) => setemailId(e.target.value)}/>
             </label>
           </div>
           <div className="mt-4">
@@ -84,7 +96,7 @@ export function Signin() {
               Aleready Have an account?{" "}
               <a
                 className="underline cursor-pointer"
-                onClick={HandleSignin}
+                onClick={HandleSignin()}
                 
               >
                 Signup
