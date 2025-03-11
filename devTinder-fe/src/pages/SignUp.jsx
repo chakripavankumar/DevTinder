@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config";
 export function SigninUp() {
   const navigate = useNavigate();
-  const [firstName, SetFristName] = useState("");
-  const [lastName, SetlastName] = useState("");
-  const [emailId, setemailId] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, SetFristName]  = useState("");
+  const [lastName, SetlastName]   = useState("");
+  const [emailId, setemailId]     = useState("");
+  const [error, setError]         = useState("");
+  const [password, setPassword]   = useState("");
 
   const HandleSignup = async () => {
 
@@ -16,8 +17,8 @@ export function SigninUp() {
             firstName, lastName,emailId,password
         });
            navigate("/feed")
-     } catch (error) {
-       console.log(error);
+     } catch (err) {
+      setError(err?.response?.data ||  "something went wrong" )
 
      }
   };
@@ -91,7 +92,7 @@ export function SigninUp() {
             <p className="validator-hint hidden">
               Must be more than 8 characters, including
               <br />
-              At least one number
+              {error}
             </p>
           </div>
           <div className="card-actions justify-center mt-4 text-center">

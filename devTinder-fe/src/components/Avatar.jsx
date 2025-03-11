@@ -1,9 +1,13 @@
+import {  useSelector } from "react-redux";
+
 export function Avatar() {
+
+  const user     = useSelector((store) =>store.user);
   return (
     <div>
       <div className="avatar">
         <div className="w-11 rounded">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          <img src= {user.photoUrl}  />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ export function Signin() {
   const navigate                  = useNavigate();
   const [emailId, setemailId]     = useState("");
   const [password, setPassword]   = useState(""); 
+  const [error, setError]         = useState("");
   const dispatch                  = useDispatch();
 
   const HandleSignin =  async ( ) => {
@@ -22,8 +23,8 @@ export function Signin() {
       dispatch(addUser(res.data));
       return  navigate("/feed")
     }
-     catch (error) {
-      console.log(error);
+     catch (err) {
+      setError(err?.response?.data ||  "something went wrong" )
     }
   }
   return (
@@ -84,7 +85,7 @@ export function Signin() {
             <p className="validator-hint hidden">
               Must be more than 8 characters, including
               <br />
-              At least one number
+              {error}
             </p>
           </div>
           <div className="card-actions justify-center mt-4 text-center">
