@@ -2,9 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config";
-
 export function SigninUp() {
-
   const navigate = useNavigate();
   const [firstName, SetFristName] = useState("");
   const [lastName, SetlastName] = useState("");
@@ -12,7 +10,7 @@ export function SigninUp() {
   const [password, setPassword] = useState("");
 
   const HandleSignup = async () => {
-    
+
      try {
             await axios.post(BASE_URL+ "/signup",{
             firstName, lastName,emailId,password
@@ -20,9 +18,10 @@ export function SigninUp() {
            navigate("/feed")
      } catch (error) {
        console.log(error);
-       
-     }   
+
+     }
   };
+ 
   return (
     <div className="h-screen w-screen bg-base-300 flex justify-center items-center">
       <div className="card card-border bg-base-100 w-80">

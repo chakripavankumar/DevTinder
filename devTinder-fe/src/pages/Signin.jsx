@@ -13,9 +13,7 @@ export function Signin() {
   const dispatch                  = useDispatch();
 
   const HandleSignin =  async ( ) => {
-
     try {
-
       const res =  await axios.post(BASE_URL + "/login" , {
         emailId,password
       },
@@ -25,7 +23,6 @@ export function Signin() {
       return  navigate("/feed")
     }
      catch (error) {
-
       console.log(error);
     }
   }
@@ -91,13 +88,11 @@ export function Signin() {
             </p>
           </div>
           <div className="card-actions justify-center mt-4 text-center">
-            <button className="btn btn-primary">Signin</button>
+            <button className="btn btn-primary"  onClick={HandleSignin}  >Signin</button>
             <p className="validator-hint text-xs">
               Aleready Have an account?{" "}
               <a
                 className="underline cursor-pointer"
-                onClick={HandleSignin()}
-                
               >
                 Signup
               </a>
